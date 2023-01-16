@@ -59,3 +59,22 @@ https://www.npmjs.com/package/nanoid?activeTab=readme
 Repo de texturas de Minecraft:
 
 https://minecraft.fandom.com/wiki/List_of_block_textures#Current_textures
+
+## **Orden de creación del Proyecto**
+
+1. Boilerplate
+2. Sky
+3. Textures & Images
+4. Ground
+5. Keyboard Inputs
+6. Player
+7. First Person View
+8. Gravity
+9. Movement
+10. State Management
+11. Cubes
+12. Adding Cubes
+13. Removing Cubes
+14. Cube Type Selector
+15. Save world in localstorage
+16. Build a house
