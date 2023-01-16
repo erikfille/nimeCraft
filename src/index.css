@@ -47,6 +47,7 @@ body {
 .texture-selector.hidden {
   display: none;
   transition: .75s;
+
 }
 
 .texture-selector img {
@@ -54,8 +55,16 @@ body {
   z-index: 100;
   image-rendering: pixelated;
   border: 3px solid #000;
+  transition: .75s;
 }
 
-.texture-selector img.selected {
+.texture-selector img.active {
   border-color: red;
+  transition: .75s;
+}
+
+.menu {
+  position: absolute;
+  top: 10px;
+  left: 10px;
 }
