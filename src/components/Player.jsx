@@ -6,7 +6,7 @@ import { useKeyboard } from "../hooks/useKeyboard";
 
 const CHARACTER_SPEED = 2;
 const CHARACTER_RUN_SPEED = 5;
-const CHARACTER_JUMP_FORCE = 3;
+const CHARACTER_JUMP_FORCE = 4;
 
 export const Player = () => {
   const { moveForward, moveBackward, moveLeft, moveRight, jump, run } =
@@ -16,7 +16,7 @@ export const Player = () => {
   const [ref, api] = useSphere(() => ({
     mass: 1,
     type: "Dynamic",
-    position: [0, 1, 0],
+    position: [0, 1.5, 0],
   }));
 
   // subscripcion a la posicion del personaje
