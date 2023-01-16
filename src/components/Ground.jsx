@@ -5,7 +5,7 @@ import { useStore } from "../hooks/useStore";
 export function Ground() {
   const [ref] = usePlane(() => ({
     rotation: [-Math.PI / 2, 0, 0], // x, y, z // Math.PI/2 hace que la camara pase de ser de 180° a ser de 90°, permitiendo que el usuario pueda ver hacia arriba y hacia abajo, teniendo como limite el eje propio
-    position: [0, -0.5, 0], // x, y, z // el eje 7 se pone ligeramente por debajo para poder tener una vista del suelo.
+    position: [0, -0.5, 0], // x, y, z // el eje y se pone ligeramente por debajo para poder agregar los cubos "apoyados" en el piso, ya que de otra manera nos muestra los cubos flotando.
   }));
 
   const [addCube] = useStore((state) => [state.addCube]);

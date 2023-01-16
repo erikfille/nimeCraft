@@ -1,19 +1,22 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 
-const ACTIONS_KEYBOARD_MAP = {
-  KeyW: "moveForward",
-  KeyS: "moveBackward",
-  KeyA: "moveLeft",
-  KeyD: "moveRight",
-  Space: "jump",
-  Digit1: "dirt",
-  Digit2: "grass",
-  Digit3: "glass",
-  Digit4: "wood",
-  Digit5: "log",
-  ShiftLeft: "run",
-  Shift: "run",
-};
+function actionByKey(key) {
+  const keyActionMap = {
+    KeyW: "moveForward",
+    KeyS: "moveBackward",
+    KeyA: "moveLeft",
+    KeyD: "moveRight",
+    Space: "jump",
+    Digit1: "dirt",
+    Digit2: "grass",
+    Digit3: "glass",
+    Digit4: "wood",
+    Digit5: "log",
+    ShiftLeft: "run",
+    Shift: "run",
+  };
+  return keyActionMap[key];
+}
 
 export const useKeyboard = () => {
   const [actions, setActions] = useState({
@@ -26,36 +29,35 @@ export const useKeyboard = () => {
     dirt: false,
     grass: false,
     glass: false,
-    log: false,
     wood: false,
+    log: false,
   });
 
-  useEffect(() => {
-    const handleKeyDown = (event) => {
-      // se declara la funcion para cuando el usuario presiona una tecla
-      const { code } = event; // extrae el codigo de la tecla que dispara el evento
-      // console.log(code)
-      const action = ACTIONS_KEYBOARD_MAP[code]; // guarda la accion realizada por el usuario
-
-      if (action) {
-        setActions((prevActions) => ({
-          ...prevActions,
+  const handleKeyDown = useCallback((e) => {
+    const action = actionByKey(e.code);
+    if (action) {
+      setActions((prevState) => {
+        return {
+          ...prevState,
           [action]: true,
-        }));
-      }
-    };
-    const handleKeyUp = (event) => {
-      // se declara la funcion para cuando el usuario deja de presionar la tecla
-      const { code } = event;
-      const action = ACTIONS_KEYBOARD_MAP[code]; // guarda la accion realizada por el usuario
+        };
+      });
+    }
+  }, []);
 
-      if (action) {
-        setActions((prevActions) => ({
-          ...prevActions,
+  const handleKeyUp = useCallback((e) => {
+    const action = actionByKey(e.code);
+    if (action) {
+      setActions((prevState) => {
+        return {
+          ...prevState,
           [action]: false,
-        }));
-      }
-    };
+        };
+      });
+    }
+  }, []);
+
+  useEffect(() => {
     document.addEventListener("keydown", handleKeyDown); // crea el evento para cada pulsacion de tecla
     document.addEventListener("keyup", handleKeyUp);
 
@@ -63,7 +65,8 @@ export const useKeyboard = () => {
       document.removeEventListener("keydown", handleKeyUp); // remueve el evento de pulsado de tecla
       document.removeEventListener("keyup", handleKeyUp);
     };
-  }, []);
+  }, [handleKeyDown, handleKeyUp]);
+
   return actions;
 };
 
