@@ -1,7 +1,8 @@
-import { grassImg, dirtImg, logImg, glassImg, woodImg } from "./images";
+import { dirtImg, grassImg, glassImg, woodImg, logImg } from "./images";
 import { NearestFilter, RepeatWrapping, TextureLoader } from "three";
 
 const groundTexture = new TextureLoader().load(grassImg);
+const grassTexture = new TextureLoader().load(grassImg);
 const dirtTexture = new TextureLoader().load(dirtImg);
 const logTexture = new TextureLoader().load(logImg);
 const glassTexture = new TextureLoader().load(glassImg);
@@ -9,10 +10,25 @@ const woodTexture = new TextureLoader().load(woodImg);
 
 groundTexture.wrapS = RepeatWrapping;
 groundTexture.wrapT = RepeatWrapping;
-[groundTexture, dirtTexture, logTexture, glassTexture, woodTexture].forEach((texture) => texture.magFilter = NearestFilter)
 
+[
+  groundTexture,
+  dirtTexture,
+  logTexture,
+  glassTexture,
+  woodTexture,
+  grassTexture,
+].forEach((texture) => (texture.magFilter = NearestFilter));
 
-export { groundTexture, dirtTexture, logTexture, glassTexture, woodTexture };
+export {
+  groundTexture,
+  dirtTexture,
+  logTexture,
+  glassTexture,
+  woodTexture,
+  grassTexture,
+};
+
 /*
 
 TextureLoader es un elemento del modulo básico de Three y nos permite cargar texturas, cosa que no podemos hacer con React por defecto. Se debe instanciar, ejecutandose seguido de un método .load que cargue la textura que necesitamos.
